@@ -1,6 +1,6 @@
-package ua.avaj.simulator.vehicles;
+package ua.avaj.simulator;
 
-import ua.avaj.weather.Coordinates;
+import ua.avaj.simulator.Coordinates;
 
 public abstract class Aircraft {
     protected long id;
@@ -9,9 +9,11 @@ public abstract class Aircraft {
     private static long idCounter;
 
     protected Aircraft(String name, Coordinates coordinates){
-
+      this.name = name;
+      this.coordinates = coordinates;
+      this.id = nextId();
     }
     private long nextId(){
-
+      return idCounter++;
     }
 }

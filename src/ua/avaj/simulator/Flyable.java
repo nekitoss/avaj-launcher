@@ -1,4 +1,4 @@
-package ua.avaj.simulator.vehicles;
+package ua.avaj.simulator;
 
 import ua.avaj.simulator.WeatherTower;
 

@@ -1,9 +1,9 @@
 package ua.avaj.simulator;
 
-public class Helicopter extends Aircraft implements Flyable{
+public class JetPlane extends Aircraft implements Flyable{
   private WeatherTower weatherTower;
 
-  Helicopter(String name, Coordinates coordinates){
+  JetPlane(String name, Coordinates coordinates){
     super(name, coordinates);
   }
   public void updateConditions(){
@@ -11,29 +11,29 @@ public class Helicopter extends Aircraft implements Flyable{
     String message = "";
     switch (currentWeather){
       case "SUN":
-        this.changeLongitude(10);
+        this.changeLatitude(10);
         this.changeHeight(2);
-        message = "I'm biggest cooler you ever seen!.";
+        message = "I have two suns behind!";
         break;
       case "RAIN":
-        this.changeLongitude(5);
-        message = "Rotating umbrella!";
+        this.changeLatitude(5);
+        message = "You can't hide from rain!";
         break;
       case "FOG":
-        this.changeLongitude(1);
-        message = "Can't see rotor!";
+        this.changeLatitude(1);
+        message = "*Angel wings*";
         break;
       case "SNOW":
-        this.changeHeight(-12);
-        message = "I see icicle round and round!";
+        this.changeHeight(-7);
+        message = "Get water from me and ice!";
         break;
     }
-    System.out.println("Helicopter#" + this.getName() + "(" + this.getId() + "):" + message);
+    System.out.println("JetPlane#" + this.getName() + "(" + this.getId() + "):" + message);
   }
   public void registerTower(WeatherTower weatherTower){
     weatherTower.register(this);
     this.weatherTower = weatherTower;
-    System.out.println("Tower says: Helicopter#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
+    System.out.println("Tower says: JetPlane#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
   }
 
   public void changeLongitude(int longitude) {
@@ -51,7 +51,7 @@ public class Helicopter extends Aircraft implements Flyable{
     if (height < 0)
     {
       height = 0;
-      System.out.println("Tower says: Helicopter#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.");
+      System.out.println("Tower says: JetPlane#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.");
       weatherTower.unregister(this);
     }
     coordinates.setHeight(height);

@@ -12,28 +12,24 @@ public class Baloon extends Aircraft implements Flyable{
     switch (currentWeather){
       case "SUN":
         this.changeLongitude(2);
-        this.changeHeight(4);
-        message = "There is no shadow here...";
+        message = "There is no shadow here..." + this.changeHeight(4);
         break;
       case "RAIN":
-        this.changeHeight(-5);
-        message = "Anyone asked for shower?";
+        message = "Anyone asked for shower?" + this.changeHeight(-5);
         break;
       case "FOG":
-        this.changeHeight(-3);
-        message = "Who is smoking?";
+        message = "Who is smoking?" + this.changeHeight(-3);
         break;
       case "SNOW":
-        this.changeHeight(-15);
-        message = "Big snowball!";
+        message = "Big snowball!" + this.changeHeight(-15);
         break;
     }
-    System.out.println("Baloon#" + this.getName() + "(" + this.getId() + "):" + message);
+    FileLogger.getLogger().logln("Baloon#" + this.getName() + "(" + this.getId() + "): " + message);
   }
   public void registerTower(WeatherTower weatherTower){
     weatherTower.register(this);
     this.weatherTower = weatherTower;
-    System.out.println("Tower says: Baloon#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
+    FileLogger.getLogger().logln("Tower says: Baloon#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
   }
 
   public void changeLongitude(int longitude) {
@@ -44,17 +40,20 @@ public class Baloon extends Aircraft implements Flyable{
     coordinates.setLatitude(coordinates.getLatitude() + latitude);
   }
 
-  public void changeHeight(int height) {
+  public String changeHeight(int height) {
+    String message = "";
     height += coordinates.getHeight();
     if (height > 100)
       height = 100;
     if (height < 0)
     {
       height = 0;
-      System.out.println("Tower says: Baloon#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.");
       weatherTower.unregister(this);
+      message = "\nBaloon#" + this.getName() + "(" + this.getId() + ") landing."
+              + "\nTower says: Baloon#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
     }
     coordinates.setHeight(height);
+    return message;
   }
 
 }

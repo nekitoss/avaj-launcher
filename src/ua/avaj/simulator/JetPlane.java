@@ -12,8 +12,7 @@ public class JetPlane extends Aircraft implements Flyable{
     switch (currentWeather){
       case "SUN":
         this.changeLatitude(10);
-        this.changeHeight(2);
-        message = "I have two suns behind!";
+          message = "I have two suns behind!" + this.changeHeight(2);
         break;
       case "RAIN":
         this.changeLatitude(5);
@@ -24,16 +23,15 @@ public class JetPlane extends Aircraft implements Flyable{
         message = "*Angel wings*";
         break;
       case "SNOW":
-        this.changeHeight(-7);
-        message = "Get water from me and ice!";
+          message = "Get water from me and ice!" + this.changeHeight(-7);
         break;
     }
-    System.out.println("JetPlane#" + this.getName() + "(" + this.getId() + "):" + message);
+      FileLogger.getLogger().logln("JetPlane#" + this.getName() + "(" + this.getId() + "): " + message);
   }
   public void registerTower(WeatherTower weatherTower){
     weatherTower.register(this);
     this.weatherTower = weatherTower;
-    System.out.println("Tower says: JetPlane#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
+      FileLogger.getLogger().logln("Tower says: JetPlane#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
   }
 
   public void changeLongitude(int longitude) {
@@ -44,17 +42,20 @@ public class JetPlane extends Aircraft implements Flyable{
     coordinates.setLatitude(coordinates.getLatitude() + latitude);
   }
 
-  public void changeHeight(int height) {
+    public String changeHeight(int height) {
+        String message = "";
     height += coordinates.getHeight();
     if (height > 100)
       height = 100;
     if (height < 0)
     {
       height = 0;
-      System.out.println("Tower says: JetPlane#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.");
       weatherTower.unregister(this);
+        message = "\nJetPlane#" + this.getName() + "(" + this.getId() + ") landing."
+                + "\nTower says: JetPlane#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
     }
     coordinates.setHeight(height);
+        return message;
   }
 
 }

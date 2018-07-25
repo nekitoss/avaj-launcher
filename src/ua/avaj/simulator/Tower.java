@@ -23,7 +23,8 @@ public abstract class Tower {
             observers.remove(oneOfGoneFlyableListeners);
         }
     }
-//  public List<Flyable> getObservers() {
-//    return observers;
-//  }
+
+    public int getObserversSize() {
+        return observers.size();
+    }
 }

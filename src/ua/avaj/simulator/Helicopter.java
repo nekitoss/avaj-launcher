@@ -12,8 +12,8 @@ public class Helicopter extends Aircraft implements Flyable{
     switch (currentWeather){
       case "SUN":
         this.changeLongitude(10);
-        this.changeHeight(2);
-        message = "I'm biggest cooler you ever seen!.";
+        message = "I'm biggest cooler you ever seen!." + this.changeHeight(2);
+        ;
         break;
       case "RAIN":
         this.changeLongitude(5);
@@ -28,12 +28,12 @@ public class Helicopter extends Aircraft implements Flyable{
         message = "I see icicle round and round!";
         break;
     }
-    System.out.println("Helicopter#" + this.getName() + "(" + this.getId() + "):" + message);
+    FileLogger.getLogger().logln("Helicopter#" + this.getName() + "(" + this.getId() + "): " + message);
   }
   public void registerTower(WeatherTower weatherTower){
     weatherTower.register(this);
     this.weatherTower = weatherTower;
-    System.out.println("Tower says: Helicopter#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
+    FileLogger.getLogger().logln("Tower says: Helicopter#" + this.getName() + "(" + this.getId() + ") registered to weather tower.");
   }
 
   public void changeLongitude(int longitude) {
@@ -44,17 +44,20 @@ public class Helicopter extends Aircraft implements Flyable{
     coordinates.setLatitude(coordinates.getLatitude() + latitude);
   }
 
-  public void changeHeight(int height) {
+  public String changeHeight(int height) {
+    String message = "";
     height += coordinates.getHeight();
     if (height > 100)
       height = 100;
     if (height < 0)
     {
       height = 0;
-      System.out.println("Tower says: Helicopter#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.");
       weatherTower.unregister(this);
+      message = "\nHelicopter#" + this.getName() + "(" + this.getId() + ") landing."
+              + "\nTower says: Helicopter#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
     }
     coordinates.setHeight(height);
+    return message;
   }
 
 }

@@ -1,7 +1,5 @@
 package ua.avaj.simulator;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -9,7 +7,6 @@ import static java.lang.Math.abs;
 public class WeatherProvider {
   private static WeatherProvider weatherProvider;
   private static String[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
-//  private static List weatherList = Arrays.asList(weather);
   public static int numberOfWeather = weather.length;
 
 
@@ -25,6 +22,7 @@ public class WeatherProvider {
   }
 
   public String getCurrentWeather(Coordinates coordinates){
-    return weather[abs(coordinates.getHeight() + coordinates.getLatitude() + coordinates.getLongitude()) % numberOfWeather];
+    Random rnd = new Random();
+    return weather[abs(coordinates.getHeight() + coordinates.getLatitude() + coordinates.getLongitude() + rnd.nextInt(13)) % numberOfWeather];
   }
 }

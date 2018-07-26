@@ -1,0 +1,9 @@
+20
+Helicopter B1 2 3 2
+Helicopter B2 22 3 2
+Helicopter B3 2 34 2
+Helicopter B4 23 36 2
+Helicopter B5 2 3 21
+Helicopter B6 2 3 20
+Helicopter B7 2 3 27
+Helicopter B8 2 1 80

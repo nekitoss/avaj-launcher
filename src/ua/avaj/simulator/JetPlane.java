@@ -52,7 +52,7 @@ public class JetPlane extends Aircraft implements Flyable{
       height = 0;
       weatherTower.unregister(this);
         message = "\nJetPlane#" + this.getName() + "(" + this.getId() + ") landing."
-                + "\nTower says: JetPlane#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
+                + "\nTower says: JetPlane#" + this.getName() + "(" + this.getId() + ") unregistered from weather tower.";
     }
     coordinates.setHeight(height);
         return message;

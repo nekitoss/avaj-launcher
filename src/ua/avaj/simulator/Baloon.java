@@ -50,7 +50,7 @@ public class Baloon extends Aircraft implements Flyable{
       height = 0;
       weatherTower.unregister(this);
       message = "\nBaloon#" + this.getName() + "(" + this.getId() + ") landing."
-              + "\nTower says: Baloon#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
+              + "\nTower says: Baloon#" + this.getName() + "(" + this.getId() + ") unregistered from weather tower.";
     }
     coordinates.setHeight(height);
     return message;

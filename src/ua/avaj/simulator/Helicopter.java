@@ -13,7 +13,6 @@ public class Helicopter extends Aircraft implements Flyable{
       case "SUN":
         this.changeLongitude(10);
         message = "I'm biggest cooler you ever seen!." + this.changeHeight(2);
-        ;
         break;
       case "RAIN":
         this.changeLongitude(5);
@@ -24,8 +23,7 @@ public class Helicopter extends Aircraft implements Flyable{
         message = "Can't see rotor!";
         break;
       case "SNOW":
-        this.changeHeight(-12);
-        message = "I see icicle round and round!";
+          message = "I see icicle round and round!" + this.changeHeight(-12);
         break;
     }
     FileLogger.getLogger().logln("Helicopter#" + this.getName() + "(" + this.getId() + "): " + message);
@@ -54,7 +52,7 @@ public class Helicopter extends Aircraft implements Flyable{
       height = 0;
       weatherTower.unregister(this);
       message = "\nHelicopter#" + this.getName() + "(" + this.getId() + ") landing."
-              + "\nTower says: Helicopter#" + this.getName() + "(" + this.getId() + ") unregistered to weather tower.";
+              + "\nTower says: Helicopter#" + this.getName() + "(" + this.getId() + ") unregistered from weather tower.";
     }
     coordinates.setHeight(height);
     return message;

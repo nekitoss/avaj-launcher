@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
       WeatherTower mainTower = new WeatherTower();
         int numberOfSimulations = 0;
         int lineNumber = 1;
-        Pattern simulationsPattern = Pattern.compile("\\d+");
+        Pattern simulationsPattern = Pattern.compile("[-+]?\\d+");
         Pattern aircraftPattern = Pattern.compile("(Baloon|Helicopter|JetPlane) (\\w+) ([-+]?\\d+) ([-+]?\\d+) ([-+]?\\d+)");
         boolean firstLine = true;
         try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
@@ -36,7 +36,6 @@ public class Main {
                         System.exit(1);
                     }
                 }
-//          System.out.println(line);
             }
 
             if (firstLine) {
@@ -57,10 +56,12 @@ public class Main {
             System.out.println("Error when reading file: " + args[0]);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Specify simulation file!");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: too big number!");
+        } catch (NullPointerException e) {
+            System.out.println("Error: tower wasn't created!");
         } finally {
             FileLogger.getLogger().killLogger();
         }
-
-
     }
 }

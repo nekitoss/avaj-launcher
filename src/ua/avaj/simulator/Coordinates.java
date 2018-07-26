@@ -6,7 +6,7 @@ public class Coordinates {
   private int height;
 
     Coordinates(int longitude, int latitude, int height) throws BadCoordinates {
-        if (height > 100 || height < 0)
+        if (height > 100 || height <= 0)
             throw new BadCoordinates("Error: Wrong coordinates: " + height);
     this.longitude = longitude;
     this.latitude = latitude;
@@ -40,13 +40,8 @@ public class Coordinates {
     class BadCoordinates extends Exception {
         public BadCoordinates() {
         }
-
-        ;
-
         public BadCoordinates(String message) {
             super(message);
         }
-
-        ;
     }
 }
